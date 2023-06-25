@@ -1,0 +1,60 @@
+/*You are developing a smartphone app. You have a list of potential customers for your app. Each customer has a budget and will buy the app at your declared price if and only if the price is less than or equal to the customer's budget.
+You want to fix a price so that the revenue you earn from the app is maximized. Find this maximum possible revenue.
+For instance, suppose you have 4 potential customers and their budgets are 30, 20, 53 and 14. In this case, the maximum revenue you can get is 60 .
+
+Input Format
+Line 1 : N, the total number of potential customers.
+Lines 2 to N+1: Each line has the budget of a potential customer.
+Constraints
+NONE
+Output Format
+The output consists of a single integer, the maximum possible revenue you can earn from selling your app.
+
+Sample Input 0
+
+5
+40
+3
+65
+33
+21
+Sample Output 0
+
+99
+
+*/
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static int calculateMaxRevenue(int[] budgets) {
+        Arrays.sort(budgets);  // Sort the budgets in ascending order
+
+        int n = budgets.length;
+        int maxRevenue = 0;
+
+        for (int i = 0; i < n; i++) {
+            int revenue = budgets[i] * (n - i);
+            maxRevenue = Math.max(maxRevenue, revenue);
+        }
+
+        return maxRevenue;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int N = scanner.nextInt();  // Total number of potential customers
+        int[] budgets = new int[N];
+
+        // Read the budgets of potential customers
+        for (int i = 0; i < N; i++) {
+            budgets[i] = scanner.nextInt();
+        }
+
+        int maxRevenue = calculateMaxRevenue(budgets);
+
+        System.out.println(maxRevenue);
+    }
+}
